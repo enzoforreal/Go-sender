@@ -60,7 +60,7 @@ func NewTwilioSMSProvider() *TwilioSMSProvider {
 	}
 }
 
-func (p *TwilioSMSProvider) SendSMS(phoneNumber string, message string) error {
+func (p *TwilioSMSProvider) SendSMS(phoneNumber string, message string /*name string*/) error {
 	// Implementation of SendSMS method using a third-party SMS provider API
 	client := twilio.NewRestClientWithParams(twilio.ClientParams{
 		AccountSid: p.AccountSid,
@@ -71,8 +71,8 @@ func (p *TwilioSMSProvider) SendSMS(phoneNumber string, message string) error {
 		Body: &MyCreateMessageParamsBody{
 			Message: msg,
 		},
-		From: p.FromNumber,
-		To:   phoneNumber,
+		From:/*name + " <" +*/ p.FromNumber, /*+ ">"*/
+		To:                                  phoneNumber,
 	}
 
 	createParams := &twilioApi.CreateMessageParams{
@@ -93,7 +93,7 @@ func (p *TwilioSMSProvider) SendSMS(phoneNumber string, message string) error {
 func (p *TwilioSMSProvider) SendMultipleSMS(phoneNumbers []string, message string) error {
 	//implementation of SendMultipleSMS method
 	for _, phoneNumber := range phoneNumbers {
-		err := p.SendSMS(phoneNumber, message)
+		err := p.SendSMS(phoneNumber, message /*, name*/)
 		if err != nil {
 			return err
 		}

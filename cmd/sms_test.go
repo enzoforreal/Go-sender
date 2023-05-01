@@ -7,13 +7,16 @@ import (
 	"testing"
 )
 
-func TestSendSMS(t *testing.T) {
+func TestSendMultipleSMS(t *testing.T) {
 	smsProvider := services.NewTwilioSMSProvider()
 
-	phoneNumber := "+33758589457" // num du destinataire
-	message := "Test message"     // message a envoyer
-
-	err := smsProvider.SendSMS(phoneNumber, message)
+	phoneNumbers := []string{
+		"+33758589457",
+		//"+33601249729",
+	}
+	url := "https://www.google.fr/"
+	message := "Bonjour DEUXIEME TEST c'est enzo lol tkt C'est juste pour tester avec un lien  si tu reçois ca cest que moi aussi je l'ai reçu cest qu'on est good aussi haha, veuillez cliquer sur ce lien pour accéder à notre site : " + url // message a envoyer
+	err := smsProvider.SendMultipleSMS(phoneNumbers, message)
 	if err != nil {
 		log.Fatal("Error sending SMS:", err)
 	}

@@ -1,8 +1,8 @@
 package interfaces
 
 type SMSProvider interface {
-	SendSMS(phoneNumber, messageContent string) error
-	SendMultipleSMS(phoneNumbers []string, messageContent string) error
+	SendSMS(phoneNumber, messageContent string /*,name string*/) error
+	SendMultipleSMS(phoneNumbers []string, messageContent string /*,name string*/) error
 }
 
 type EMAILProvider interface {
